@@ -11,7 +11,7 @@ provider "docker" {}
 
 
 resource "docker_image" "qemu" {
-  name = "qemux/qemu-docker:5.16"
+  name = "qemux/qemu:latest"
 }
 
 resource "docker_volume" "qemu_storage" {

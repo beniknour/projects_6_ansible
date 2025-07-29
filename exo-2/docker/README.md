@@ -48,3 +48,16 @@ Une interface VNC est également disponible à l'adresse http://localhost:8006 (
 ### Liens
 
 - https://powersj.io/posts/ubuntu-qemu-cli/
+
+### Connexion au serveur
+
+Se connecter à la machine virtuelle via SSH :
+
+```bash
+ssh -p 2222 openclassrooms@127.0.0.1
+```
+### Tester la connexion Ansible
+
+```
+ansible -i hosts vm -m ping
+```
