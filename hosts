@@ -1,0 +1,3 @@
+[vm]
+127.0.0.1 ansible_port=2222 ansible_user=openclassrooms ansible_ssh_pass=openclassrooms
+
