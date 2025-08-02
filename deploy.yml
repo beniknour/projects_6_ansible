@@ -1,0 +1,54 @@
+- hosts: all
+  become: yes
+
+  vars:
+    app_root: "files/appli_angular_p6/dist/olympic-games-starter/"
+    document_root: "/var/www/html"
+
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: latest
+        update_cache: yes
+
+    - name: Copy Angular application to /var/www/html
+      copy:
+        src: "{{ app_root }}/"
+        dest: "{{ document_root }}/"
+        owner: www-data
+        group: www-data
+        mode: '0755'
+        remote_src: no
+
+    - name: Configure Nginx using template
+      template:
+        src: nginx.conf.j2
+        dest: /etc/nginx/sites-available/olympic
+      notify: Restart Nginx
+
+    - name: Enable site by creating symbolic link
+      file:
+        src: /etc/nginx/sites-available/olympic
+        dest: /etc/nginx/sites-enabled/olympic
+        state: link
+      notify: Restart Nginx
+
+
+    - name: Disable default site
+      file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+      notify: Restart Nginx
+
+    - name: Allow port 80 through firewall
+      ufw:
+        rule: allow
+        port: 80
+        proto: tcp
+
+  handlers:
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted

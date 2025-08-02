@@ -61,3 +61,19 @@ ssh -p 2222 openclassrooms@127.0.0.1
 ```
 ansible -i hosts vm -m ping
 ```
+
+### Exécuter le playbook
+
+
+```
+ansible-playbook -i hosts deploy.yml
+```
+
+# Vérifier la configuration de Nginx
+sudo nginx -t
+
+# Redémarrer Nginx
+sudo systemctl restart nginx
+
+# Vérifier le statut de Nginx
+sudo systemctl status nginx.service
