@@ -1,5 +1,5 @@
 server {
-    listen 80;
+    listen 8082;
     server_name localhost;
 
     root /var/www/html;
@@ -16,7 +16,8 @@ server {
     error_page 404 /index.html;
 
     location ~* (\.html|\/sw\.js)$ {
-    expires -1;
-    add_header Cache-Control "no-cache, no-store, must-revalidate";
-    add_header Pragma "no-cache";
+        expires -1;
+        add_header Cache-Control "no-cache, no-store, must-revalidate";
+        add_header Pragma "no-cache";
+    }
 }
